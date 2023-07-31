@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+#Writing  a Bash script that displays its own PID
+# Get the current process ID (PID) of the script
+pid=$$
+
+# Display the PID
+echo "The PID of this script is: $pid"

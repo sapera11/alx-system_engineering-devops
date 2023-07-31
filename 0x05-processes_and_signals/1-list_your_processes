@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+#Writing a Bash script that displays a list of currently running processes
+# Get a list of all running processes along with their hierarchy
+process_list=$(ps axjf)
+
+# Format and display the output in a user-friendly way
+echo "Process Tree:"
+echo "==========================================================================="
+echo " PID    PPID   PGID    SID  TTY        STATE  CMD"
+echo "==========================================================================="
+
+echo "$process_list" | awk '{printf "%5s  %5s  %5s  %5s  %-10s  %-5s  %s\n", $2, $3, $4, $5, $6, $8, $9}'
+
+echo "==========================================================================="
+
