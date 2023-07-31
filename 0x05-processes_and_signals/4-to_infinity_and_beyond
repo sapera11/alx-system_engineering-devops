@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# how to create infinity and beyond indefinitely
+
+echo "To infinity and beyond indefinitely:"
+
+# Infinite loop
+while true; do
+    echo "To infinity and beyond!"
+    sleep 2
+done
+

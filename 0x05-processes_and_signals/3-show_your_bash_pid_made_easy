@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+#Creates the file /var/run/myscript.pid containing its PID
+
+echo "Processes with names containing 'bash':"
+echo "============================================================="
+echo "  PID     Process Name"
+echo "============================================================="
+
+# Loop through all directories in /proc and check if the process name contains "bash"
+for pid in /proc/[0-9]*; do
+    if [[ -d "$pid" && -r "$pid/cmdline" ]]; then
+        process_name=$(tr '\0' ' ' < "$pid/cmdline")
+        if grep -q -w "bash" <<< "$process_name"; then
+            pid=$(basename "$pid")
+            echo "  $pid     $process_name"
+        fi
+    fi
+done
+
+echo "============================================================="
+
