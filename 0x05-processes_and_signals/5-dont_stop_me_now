@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#Creates the file /var/run/myscript.pid containing its PID
+#Displays To infinity and beyond indefinitely
+
+echo "To infinity and beyond indefinitely:"
+
+# Infinite loop
+while true; do
+    echo "To infinity and beyond!"
+    sleep 2
+done
+#!/bin/bash
+
+# Start the 'to_infinity.sh' script in the background and disassociate it from the terminal
+./4-to_infinity_and_beyond.sh &
+disown
+
+echo "I won't stop now! You can't terminate me!"
+while true; do
+    sleep 2
+done
+

@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#Creates the file /var/run/myscript.pid containing its PID
+#Displays To infinity and beyond indefinitely
+
+# Store the process ID (PID) of the script
+echo $$ > /tmp/to_infinity_and_beyond_pid
+
+echo "To infinity and beyond indefinitely:"
+
+# Infinite loop
+while true; do
+    echo "To infinity and beyond!"
+    sleep 2
+done
+
+# Read the PID of the 'to_infinity_and_beyond' process from the file
+to_infinity_pid=$(cat /tmp/to_infinity_and_beyond_pid)
+
+if [[ -n $to_infinity_pid ]]; then
+    echo "Stopping the process with PID: $to_infinity_pid"
+    # Send SIGTERM signal to stop the process gracefully
+    kill -15 "$to_infinity_pid"
+    # Remove the temporary PID file
+    rm /tmp/to_infinity_and_beyond_pid
+else
+    echo "Process 'to_infinity_and_beyond' is not running."
+fi
+
