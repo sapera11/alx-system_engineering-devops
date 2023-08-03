@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Check if the IP address argument is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 {IP_ADDRESS}"
+  exit 1
+fi
+
+# Function to ping the IP address 5 times
+ping_ip() {
+  local ip_address=$1
+  ping -c 5 $ip_address
+}
+
+# Call the function with the provided IP address argument
+ping_ip $1
+
