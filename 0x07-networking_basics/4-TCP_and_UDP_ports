@@ -1,26 +1,3 @@
 #!/usr/bin/env bash
-
-# Check if the script is run with root privileges
-if [[ $EUID -ne 0 ]]; then
-    echo "This script must be run as root (or with sudo)." >&2
-    exit 1
-fi
-
-# Run netstat to get a list of listening sockets and store it in the variable "listening_sockets"
-listening_sockets=$(netstat -tuln)
-
-# Print header for the output
-echo "Listening Ports:"
-
-# Loop through each line of the netstat output
-while IFS= read -r line; do
-    # Check if the line contains "LISTEN" indicating a listening socket
-    if echo "$line" | grep -q "LISTEN"; then
-        # Extract PID and Program Name using awk and lsof commands
-        pid=$(echo "$line" | awk '{print $7}' | cut -d'/' -f1)
-        program_name=$(lsof -p "$pid" -Fn | grep -i "command" | cut -c 9-)
-        # Print the result
-        echo "$line ($program_name)"
-    fi
-done <<< "$listening_sockets"
-
+# TCP and UDP ports listening
+netstat -lp
